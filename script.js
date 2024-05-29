@@ -54,7 +54,13 @@ function createCountryCards(countries){
                     }
                     return res.json();
                 })
-                .then(data=>alert(JSON.stringify(data)))
+                .then(data=>{
+                    let weatherData = data["weather"][0]["description"];
+                    let temperatureKelvin= data["main"]["temp"];
+                    let temperatureFah = (((temperatureKelvin-273.15)*1.8)+32).toFixed(2);
+                    let weatherDetails = `Weather: ${weatherData} and Temperature:${temperatureFah} degF`;
+                    alert(weatherDetails);
+                })
                 .catch(err=>console.log(err))
         });
 
